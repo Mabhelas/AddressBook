@@ -26,7 +26,9 @@ namespace AddressBook.Tests
             var model = new AddressBookContacts { FirstName = "",
                                                   Surname = "",
                                                 TelephoneNumber = ""}; // Invalid model
+                                                                       
             //var mockRepo = new Mock<AddressBookDbContext>(context);
+
             var controller = new AddressBookContactsController(context);
 
             // Have to explictly add this
@@ -38,6 +40,7 @@ namespace AddressBook.Tests
             var result = controller.AddorEdit(model);
 
             // Assert etc
+            Assert.NotNull(result);
         }
     }
 }
