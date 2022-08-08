@@ -1,0 +1,76 @@
+﻿@model AddressBook.Models.AddressBookContacts
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+
+<div class="row">
+    <div class="col-md-6 offset-md-4">
+        <h1>Address Book</h1>
+        <form asp-action="AddorEdit" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ContactId"/>
+            <input type="hidden" asp-for="Age" />
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Birthday" class="control-label"></label>
+                <input type="date" asp-for="Birthday" class="form-control" />
+                <span asp-validation-for="Birthday" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelephoneNumber" class="control-label"></label>
+                <input asp-for="TelephoneNumber" class="form-control" placeholder="Include area code(e.g +27)"/>
+                <span asp-validation-for="TelephoneNumber" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                 <input type="hidden" asp-for="ContactId" value="@Model.ContactId" id="testId"/>
+                <select asp-for="Country" class="form-control" id="country">
+                    <option value="">Country</option>
+                </select>
+@*                @Html.DropDownList("CountryId", null, new { @class = "form-control",id="country" })     
+                @Html.DropDownList("CountryId", null, htmlAttributes: new { @class = "form-control", @id = "country" })*@
+                  @*@Html.DropDownListFor(model => model.Country, new SelectList(ViewBag.CountryId, @ViewBag.SelectedCountryId),htmlAttributes: new { @class = "form-control", @id = "country" })*@
+
+             </div>
+             <div class="form-group">
+                <select asp-for="State" class="form-control" id="state">
+                    <option value="">State</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select asp-for="City" class="form-control" id="city">
+                    <option value="">City</option>
+                </select>
+            </div>
+
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary w-100"/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <a asp-action="Index"  class="btn btn-secondary w-100">View All</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
