@@ -41,10 +41,5 @@ namespace AddressBook.Models
         [Required(ErrorMessage = "This field is required")]
         public string City { get; set; }
 
-        /*
-        [Column(TypeName = "nvarchar(100)")]
-        [Required(ErrorMessage = "This field is required")]
-        public string Address { get; set; }
-        */
     }
 }

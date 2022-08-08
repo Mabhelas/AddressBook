@@ -27,11 +27,8 @@ namespace AddressBook.Tests
                                                   Surname = "",
                                                 TelephoneNumber = ""}; // Invalid model
                                                                        
-            //var mockRepo = new Mock<AddressBookDbContext>(context);
-
             var controller = new AddressBookContactsController(context);
 
-            // Have to explictly add this
             controller.ModelState.AddModelError(model.FirstName, "This field is required");
             controller.ModelState.AddModelError(model.Surname, "This field is required");
             controller.ModelState.AddModelError(model.TelephoneNumber, "This field is required");

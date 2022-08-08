@@ -50,26 +50,18 @@ namespace AddressBook.Controllers
                 selectedContactId = id;
                 ViewBag.CountryId = country.FirstOrDefault(x => x.ContactId == id).Country;
                 ViewBag.SelectedCountryId = ViewBag.CountryId;
-                //ViewBag.CountryId = _context.AddressBook
-                //                    .Select(c => new SelectListItem
-                //                    {
-                //                        Value = c.Country,
-                //                        Text = c.Country,
-                //                        Selected = c.ContactId == id
-                //                    }).ToListAsync();
                 return View(_context.AddressBook.Find(id));
         }
 
-    // POST: AddressBookContacts/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+        // POST: AddressBookContacts/AddorEdit
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddorEdit([Bind("ContactId,FirstName,Surname,Age,Birthday,TelephoneNumber,Country,State,City")] AddressBookContacts addressBook)
         {
             if (ModelState.IsValid)
             {
                 addressBook.Age = DateTime.Now.Year - addressBook.Birthday.Year;
+
                 //Check if it's an insert or update operation
                 if (addressBook.ContactId == 0)
                 {
@@ -105,6 +97,7 @@ namespace AddressBook.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //Get saved country for a user
         public ActionResult getCountry(int id)
         {
             var country = from c in _context.AddressBook
